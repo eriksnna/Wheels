@@ -1,0 +1,22 @@
+@startuml
+actor Recepcionista
+participant "MainController" as Menu
+participant "PaymentController" as PaymentCtrl
+participant "HireController" as HireCtrl
+
+Recepcionista -> Menu : abrir sistema
+Recepcionista -> Menu : handleDevolverBicicleta()
+
+Menu -> PaymentCtrl : abrirTelaDevolucao()
+PaymentCtrl -> HireCtrl : carregarAlugueisPendentes()
+
+Recepcionista -> PaymentCtrl : selecionar aluguel
+HireCtrl -> HireCtrl : calcularPagamento()
+
+PaymentCtrl --> Recepcionista : exibir valor final
+
+Recepcionista -> PaymentCtrl : confirmar devolução
+PaymentCtrl -> PaymentCtrl : handleConfirmarPagamento()
+
+PaymentCtrl --> Recepcionista : confirmação de devolução
+@enduml

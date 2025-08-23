@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="org.example.controllers.PaymentController"
+      spacing="15"
+      alignment="CENTER"
+      prefWidth="550" prefHeight="400"
+      stylesheets="@styles.css"
+      styleClass="payment">
+
+    <padding>
+        <Insets top="20" right="20" bottom="20" left="20"/>
+    </padding>
+
+    <Label text="pagamento de aluguel" styleClass="title"/>
+
+    <GridPane hgap="10" vgap="10" alignment="CENTER">
+
+        <Label text="aluguel:" styleClass="subtitle" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+        <ComboBox fx:id="hireComboBox" promptText="Selecione o aluguel pendente"
+                  GridPane.columnIndex="1" GridPane.rowIndex="0" prefWidth="220"/>
+
+        <Label text="data do pagamento:" styleClass="subtitle" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+        <DatePicker fx:id="paymentDatePicker" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+
+
+        <Label text="depósito a reembolsar:" styleClass="subtitle" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
+        <Label fx:id="depositReturnLabel" styleClass="subtitle" text="R$ 0,00" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+
+        <Label fx:id="totalPaymentLabel" text="Total a pagar:" styleClass="subtitle" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
+        <Label fx:id="totalPaymentValueLabel" text="R$ 0,00" styleClass="subtitle" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
+
+        <CheckBox fx:id="damagedCheckBox" styleClass="subtitle" text="Bike com danos" GridPane.columnIndex="0" GridPane.rowIndex="4" GridPane.columnSpan="4"/>
+    </GridPane>
+
+    <Button fx:id="confirmPaymentButton" text="concluir devolução" styleClass="botao" prefWidth="200"/>
+
+</VBox>

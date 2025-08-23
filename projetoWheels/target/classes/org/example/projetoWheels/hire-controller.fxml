@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns="http://javafx.com/javafx/21"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="org.example.controllers.HireController"
+      spacing="15"
+      stylesheets="@styles.css"
+      styleClass="hire"
+      prefWidth="400" prefHeight="550">
+
+    <padding>
+        <Insets top="20" right="20" bottom="20" left="20"/>
+    </padding>
+
+    <Label text="registro de aluguel" styleClass="title"/>
+
+    <GridPane hgap="10" vgap="10" alignment="CENTER">
+        <ComboBox fx:id="customerComboBox" promptText="selecione um cliente"
+                  GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+
+        <ComboBox fx:id="bikeComboBox" promptText="selecione uma bicicleta"
+                  GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+
+        <DatePicker fx:id="startDatePicker" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+
+        <DatePicker fx:id="returnDatePicker" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
+    </GridPane>
+
+    <Button styleClass="botao" text="calcular aluguel" onAction="#calcularAluguel"/>
+
+    <Label fx:id="totalLabel" text="total a pagar: R$ 0,00" styleClass="title"/>
+
+    <Button fx:id="confirmButton" styleClass="botao" text="Pagar" onAction="#handleSalvarAluguel"/>
+
+    <Button fx:id="generatePdfButton" styleClass="botao" text="gerar recibo (PDF)" onAction="#handleGerarPdf" visible="false"/>
+
+</VBox>

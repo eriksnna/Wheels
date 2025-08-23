@@ -1,0 +1,350 @@
+@startuml
+
+class Bike {
+    - bikeId: Int
+    - bikeType: String
+    - bikeBrand: String
+    - bikeModel: String
+    - rentalPrice: Double
+    - depositPrice: Double
+    - isAvailable: Boolean
+    + getBikeId()
+    + setBikeId(int)
+    + getBikeType()
+    + setBikeType()
+    + getBikeBrand()
+    + setBikeBrand()
+    + getBikeModel()
+    + setBikeModel()
+    + getRentalPrice()
+    + setRentalPrice()
+    + getDepositPrice()
+    + setDepositPrice()
+    + getIsAvailable()
+    + setIsAvailable()
+}
+
+BikeController --> Bike
+
+HireController --> Bike
+
+BikeTableController --> Bike
+
+HireDAO --> Bike
+
+PaymentController --> Bike
+
+
+
+    class BikeController {
+        - bikeTypeField: TextField
+        - bikeBrandField: TextField
+        - bikeModelField: TextField
+        - rentalPriceField: TextField
+        - depositPriceField: TextField
+        - isAvailableCheck: CheckBox
+        + handleSalvar(): void
+        + atualizarDeposito(): void
+        - todosCamposPreenchidos(): boolean
+        - parseDouble(texto: String, tipoAlerta: String, mensagem: String): Double
+        - limparCampos(): void
+        - showAlert(type: AlertType, title: String, content: String): void
+        - calcularDeposito(rentalPrice: double): double
+    }
+
+    class BikeDAO {
+        + BikeDAO()
+        + static void criarTabelaSeNaoExistir()
+        + static void salvar(bike: Bike)
+        + static List<Bike> listarTodos()
+        + static void atualizar(bike: Bike)
+        + static Bike buscarPorId(id: int)
+    }
+
+HireDAO --> BikeDAO
+
+PaymentController --> BikeDAO
+
+BikeController --> BikeDAO
+
+HireController --> BikeDAO
+
+DatabaseInitializer --> BikeDAO
+
+BikeTableController --> BikeDAO
+
+
+    class BikeTableController {
+            - tableView : TableView<Bike>
+            - colBikeId : TableColumn<Bike, Number>
+            - colBikeType : TableColumn<Bike, String>
+            - colBikeBrand : TableColumn<Bike, String>
+            - colBikeModel : TableColumn<Bike, String>
+            - colRentalPrice : TableColumn<Bike, Number>
+            - colDepositPrice : TableColumn<Bike, Number>
+            - colIsAvailable : TableColumn<Bike, Boolean>
+            - bikes : ObservableList<Bike>
+
+            + initialize() : void
+            - configurarColunasEditaveis() : void
+            - configurarColunasNaoEditaveis() : void
+            - configurarColunaTexto(coluna : TableColumn<Bike, String>, nomeCampo : String) : void
+            - configurarColunaNumero(coluna : TableColumn<Bike, Number>, nomeCampo : String) : void
+            - carregarBikes() : void
+            + handleSalvarAlteracoes() : void
+            - mostrarAlertaSucesso() : void
+        }
+
+
+class Customer {
+    - customerId: Int
+    - customerName: String
+    - customerAddress: String
+    - customerTelephoneNumber: String
+    - isStudent: Boolean
+    - isSenior: Boolean
+    + getCustomerId()
+    + setCustomerId()
+    + getCustomerName()
+    + setCustomerName()
+    + getCustomerAddress()
+    + setCustomerAddress()
+    + getCustomerTelephoneNumber()
+    + setCustomerTelephoneNumber()
+    + getIsStudent()
+    + setIsStudent()
+    + getIsSenior()
+    + setIsSenior()
+}
+
+HireController --> Customer
+
+CustomerController --> Customer
+
+CustomerTableController --> Customer
+
+CustomerDAO --> Customer
+
+HireDAO --> Customer
+
+PaymentController --> Customer
+
+
+class CustomerController {
+    - customerNameField: TextField
+    - customerAddressField: TextField
+    - customerTelephoneNumberField: TextField
+    - isStudentCheck: CheckBox
+    - isSeniorCheck: CheckBox
+    - customer: Customer
+
+    + initialize(): void
+    + handleSalvar(): void
+
+    - camposObrigatoriosVazios(): boolean
+    - limparCampos(): void
+    - bindCampos(): void
+    - mostrarAlerta(type: AlertType, titulo: String, conteudo: String): void
+}
+
+class CustomerDAO {
+    + CustomerDAO()
+    + static criarTabelaSeNaoExistir(): void
+    + static salvar(c: Customer): void
+    + static listarTodos(): List<Customer>
+    + static atualizar(c: Customer): void
+    + static buscarPorId(id: int): Customer
+}
+
+HireDAO --> CustomerDAO
+
+DatabaseInitializer --> CustomerDAO
+
+CustomerController --> CustomerDAO
+
+HireController --> CustomerDAO
+
+CustomerTableController --> CustomerDAO
+
+class CustomerTableController {
+        - tableView : TableView<Customer>
+        - colCustomerId : TableColumn<Customer, Number>
+        - colCustomerName : TableColumn<Customer, String>
+        - colCustomerAddress : TableColumn<Customer, String>
+        - colCustomerTelephoneNumber : TableColumn<Customer, String>
+        - colIsStudent : TableColumn<Customer, Boolean>
+        - colIsSenior : TableColumn<Customer, Boolean>
+        - customers : ObservableList<Customer>
+
+        + initialize() : void
+        - configurarColunaCustomerId() : void
+        - configurarColunaEditavelNome() : void
+        - configurarColunaEditavelEndereco() : void
+        - configurarColunaEditavelTelefone() : void
+        - configurarColunaCheckboxIsStudent() : void
+        - configurarColunaCheckboxIsSenior() : void
+        + handleSalvarAlteracoes() : void
+}
+
+class Hire {
+    - startDate: Date
+    - numberDays: Int
+    - dateReturn: Date
+    - latenessDeduction: Double
+    - damageDeduction: Double
+    - id: Int
+    - paymentMade: Boolean
+    + getStartDate()
+    + setStartDate()
+    + getNumberDays()
+    + setNumberDays(int)
+    + getDateReturn()
+    + setDateReturn(Date)
+    + getLatenessDeduction()
+    + setLatenessDeduction()
+    + getDamageDeduction()
+    + setDamageDeduction()
+    + getId()
+    + setId(int)
+    + getPaymentMade()
+    + setPaymentMade()
+}
+
+PaymentController --> Hire
+
+HireController --> Hire
+
+HireDAO --> Hire
+
+
+class HireController {
+    - ultimaMensagemRecibo : String
+    + initialize() : void
+    - carregarClientes() : void
+    - carregarBikesDisponiveis() : void
+    - configurarConversores() : void
+    - configurarDatePickers() : void
+    - configurarBotoes() : void
+    + handleSalvarAluguel() : void
+    + calcularAluguel() : void
+    - limparFormulario() : void
+    - showAlert(msg: String) : void
+    + handleGerarPdf() : void
+}
+
+
+
+class HireDAO {
+    + criarTabelaSeNaoExistir() : void
+    + salvar(hire: Hire) : void
+    + listarTodosPendentes() : List<Hire>
+    + atualizar(hire: Hire) : void
+}
+
+PaymentController --> HireDAO
+
+DatabaseInitializer --> HireDAO
+
+HireController --> HireDAO
+
+class Payment {
+    - id: Int
+    - paymentDate: Date
+    - totalAmountPaid: Double
+    - totalDepositPaid: Double
+    - totalDepositReturned: Double
+    - paid: Boolean
+    - bikeId: Int
+    - customerName: String
+    + getId()
+    + setId(int)
+    + getPaymentDate()
+    + setPaymentDate(Date)
+    + getTotalAmountPaid()
+    + setTotalAmountPaid()
+    + getTotalDepositPaid()
+    + setTotalDepositPaid()
+    + getTotalDepositReturned()
+    + setTotalDepositReturned()
+    + getPaid()
+    + setPaid()
+    + getBikeId()
+    + setBikeId(int)
+    + getCustomerName()
+    + setCustomerName()
+}
+
+PaymentController --> Payment
+
+PaymentDAO --> Payment
+
+PaymentTableController --> Payment
+
+class PaymentController {
+    - hireComboBox : ComboBox<Hire>
+    - paymentDatePicker : DatePicker
+    - damagedCheckBox : CheckBox
+    - totalPaymentLabel : Label
+    - totalPaymentValueLabel : Label
+    - depositReturnLabel : Label
+    - confirmPaymentButton : Button
+    - currentPayment : Payment
+    + initialize() : void
+    - carregarAlugueisPendentes() : void
+    - calcularPagamento() : void
+    - handleConfirmarPagmento() : void
+    - limparFormulario() : void
+    - showAlert(msg: String) : void
+}
+
+class PaymentDAO {
+    + criarTabelaSeNaoExistir() : void
+    + salvar(payment: Payment) : void
+    + listar() : List<Payment>
+}
+
+PaymentController --> PaymentDAO
+
+DatabaseInitializer --> PaymentDAO
+
+PaymentTableController --> PaymentDAO
+
+class PaymentTableController {
+        - TableView<Payment> tableView
+        - TableColumn<Payment, Integer> colId
+        - TableColumn<Payment, LocalDate> colPaymentDate
+        - TableColumn<Payment, Double> colTotalAmountPaid
+        - TableColumn<Payment, Double> colTotalDepositPaid
+        - TableColumn<Payment, Double> colTotalDepositReturned
+        - TableColumn<Payment, Boolean> colIsPaid
+        - TableColumn<Payment, String> customerNameColumn
+        - TableColumn<Payment, Number> bikeIdColumn
+        - ObservableList<Payment> payments
+
+        + initialize(): void
+        + handleAtualizarLista(): void
+        - atualizarTabela(): void
+    }
+
+
+class DatabaseManager {
+    - URL : String = "jdbc:sqlite:wheels.db"
+    + connect() : Connection
+}
+
+CustomerDAO --> DatabaseManager
+
+BikeDAO --> DatabaseManager
+
+PaymentDAO --> DatabaseManager
+
+HireDAO --> DatabaseManager
+
+
+class DatabaseInitializer {
+    + initialize() : void
+}
+
+}
+
+@enduml

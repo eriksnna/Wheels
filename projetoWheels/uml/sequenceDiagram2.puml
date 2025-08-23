@@ -1,0 +1,14 @@
+@startuml
+actor Recepcionista
+participant "MainController" as Menu
+participant "BikeController" as BikeCtrl
+
+Recepcionista -> Menu : abrir sistema
+Recepcionista -> Menu : handleCadastrarBicicleta()
+Menu -> BikeCtrl : abrirTelaCadastro()
+
+Recepcionista -> BikeCtrl : inserir dados da bicicleta
+Recepcionista -> BikeCtrl : handleSalvar()
+BikeCtrl --> Recepcionista : confirmação de sucesso
+
+@enduml

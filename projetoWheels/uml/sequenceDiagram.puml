@@ -1,0 +1,21 @@
+@startuml
+actor Recepcionista
+participant "MainController" as Menu
+participant "CustomerController" as CustomerCtrl
+participant "CustomerTableController" as CustomerTCtrl
+participant "HireController" as HireCtrl
+
+Recepcionista -> Menu : abrir sistema
+Menu -> CustomerTCtrl : handleAlugarBicicleta()
+
+alt cliente não cadastrado
+    CustomerTCtrl -> CustomerCtrl : cliente não encontrado
+    Menu -> CustomerCtrl : abrirCadastroCliente()
+    Recepcionista -> CustomerCtrl : recepcionista insere os dados
+    CustomerCtrl -> CustomerCtrl : handleSalvar()
+end
+
+Menu -> HireCtrl :  handleAlugarBicicleta()
+Recepcionista -> HireCtrl : handleSalvarAluguel()
+Recepcionista -> HireCtrl : handleGerarPdf()
+@enduml

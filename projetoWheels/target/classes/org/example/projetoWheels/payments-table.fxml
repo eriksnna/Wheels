@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns="http://javafx.com/javafx/21"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="org.example.controllers.PaymentTableController"
+      spacing="10">
+
+    <padding>
+        <Insets top="10" right="10" bottom="10" left="10"/>
+    </padding>
+
+    <TableView fx:id="tableView" editable="false">
+        <columns>
+            <TableColumn fx:id="colId" text="id" prefWidth="50"/>
+            <TableColumn fx:id="customerNameColumn" text="cliente" prefWidth="120"/>
+            <TableColumn fx:id="bikeIdColumn" text="bike id" prefWidth="80"/>
+            <TableColumn fx:id="colPaymentDate" text="data pagamento" prefWidth="120"/>
+            <TableColumn fx:id="colTotalAmountPaid" text="total pago" prefWidth="100"/>
+            <TableColumn fx:id="colTotalDepositReturned" text="depósito reembolsado" prefWidth="130"/>
+        </columns>
+    </TableView>
+
+    <Button text="atualizar lista" onAction="#handleAtualizarLista" styleClass="botao"/>
+
+</VBox>

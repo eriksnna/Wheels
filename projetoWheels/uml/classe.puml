@@ -1,0 +1,117 @@
+@startuml
+
+skinparam class {
+    BackgroundColor<<Main>> LightYellow
+    BorderColor<<Main>> Black
+    ArrowColor DarkGray
+}
+
+package "classes principais" {
+    class Bike {
+        - bikeId: Int
+        - bikeType: String
+        - bikeBrand: String
+        - bikeModel: String
+        - rentalPrice: Double
+        - depositPrice: Double
+        - isAvailable: Boolean
+    }
+
+    class Customer {
+        - customerId: Int
+        - customerName: String
+        - customerAddress: String
+        - customerTelephoneNumber: String
+        - isStudent: Boolean
+        - isSenior: Boolean
+    }
+
+    class Hire {
+        - startDate: Date
+        - numberDays: Int
+        - dateReturn: Date
+        - latenessDeduction: Double
+        - damageDeduction: Double
+        - id: Int
+        - paymentMade: Boolean
+    }
+
+    class Payment {
+        - id: Int
+        - paymentDate: Date
+        - totalAmountPaid: Double
+        - totalDepositPaid: Double
+        - totalDepositReturned: Double
+        - paid: Boolean
+        - bikeId: Int
+        - customerName: String
+    }
+}
+
+package "Controllers" {
+    class BikeController
+    class CustomerController
+    class HireController
+    class PaymentController
+}
+
+package "Table Controllers" {
+    class BikeTableController
+    class CustomerTableController
+    class PaymentTableController
+}
+
+package "DAOs" {
+    class BikeDAO
+    class CustomerDAO
+    class HireDAO
+    class PaymentDAO
+}
+
+class DatabaseManager
+class DatabaseInitializer
+
+BikeController --> Bike
+CustomerController --> Customer
+HireController --> Hire
+PaymentController --> Payment
+
+BikeController --> BikeDAO
+CustomerController --> CustomerDAO
+HireController --> HireDAO
+PaymentController --> PaymentDAO
+
+BikeDAO --> Bike
+CustomerDAO --> Customer
+HireDAO --> Hire
+PaymentDAO --> Payment
+
+BikeTableController --> Bike
+CustomerTableController --> Customer
+PaymentTableController --> Payment
+
+BikeTableController --> BikeDAO
+CustomerTableController --> CustomerDAO
+PaymentTableController --> PaymentDAO
+
+BikeDAO --> DatabaseManager
+CustomerDAO --> DatabaseManager
+HireDAO --> DatabaseManager
+PaymentDAO --> DatabaseManager
+
+DatabaseInitializer --> BikeDAO
+DatabaseInitializer --> CustomerDAO
+DatabaseInitializer --> HireDAO
+DatabaseInitializer --> PaymentDAO
+
+HireController --> Customer
+HireController --> Bike
+HireController --> CustomerDAO
+HireController --> BikeDAO
+
+PaymentController --> Hire
+PaymentController --> HireDAO
+PaymentController --> Customer
+PaymentController --> Bike
+
+@enduml
