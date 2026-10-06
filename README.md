@@ -1,2 +1,2 @@
 # Wheels
-Projeto de Aluguel de Bicicletas feito majoritariamente em JavaFX
+Projeto Universitário de Aluguel de Bicicletas feito majoritariamente em JavaFX.
